@@ -113,14 +113,14 @@ router.post('/', async (req, res) => {
       `INSERT INTO clients (
         full_name, father_husband_name, cnic, dob, gender, nationality,
         mobile, alt_phone, email, current_address, permanent_address, city, province,
-        occupation, employer, ntn, strn, tax_remarks, legal_remarks, internal_comments,
+        occupation, employer, ntn, strn, fbr_password, tax_remarks, legal_remarks, internal_comments,
         created_by, updated_by
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$21)
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$22)
       RETURNING *`,
       [
         full_name, father_husband_name, cnic || null, dob || null, gender, nationality || 'Pakistani',
         mobile, alt_phone, email, current_address, permanent_address, city, province,
-        occupation, employer, ntn || null, strn || null, tax_remarks, legal_remarks, internal_comments,
+        occupation, employer, ntn || null, strn || null, req.body.fbr_password || null, tax_remarks, legal_remarks, internal_comments,
         req.user.id,
       ]
     );
@@ -150,14 +150,14 @@ router.put('/:id', async (req, res) => {
         full_name=$1, father_husband_name=$2, cnic=$3, dob=$4, gender=$5, nationality=$6,
         mobile=$7, alt_phone=$8, email=$9, current_address=$10, permanent_address=$11,
         city=$12, province=$13, occupation=$14, employer=$15, ntn=$16, strn=$17,
-        tax_remarks=$18, legal_remarks=$19, internal_comments=$20,
-        updated_by=$21, updated_at=NOW()
-       WHERE id=$22
+        fbr_password=$18, tax_remarks=$19, legal_remarks=$20, internal_comments=$21,
+        updated_by=$22, updated_at=NOW()
+       WHERE id=$23
        RETURNING *`,
       [
         full_name, father_husband_name, cnic || null, dob || null, gender, nationality,
         mobile, alt_phone, email, current_address, permanent_address, city, province,
-        occupation, employer, ntn || null, strn || null, tax_remarks, legal_remarks, internal_comments,
+        occupation, employer, ntn || null, strn || null, req.body.fbr_password || null, tax_remarks, legal_remarks, internal_comments,
         req.user.id, req.params.id,
       ]
     );

@@ -45,6 +45,11 @@ export default function AddClient() {
   }
 
   const onSubmit = async (data) => {
+    if (step < 5) {
+      nextStep()
+      return
+    }
+    
     setLoading(true)
     try {
       const res = await api.post('/clients', data)
@@ -193,6 +198,9 @@ export default function AddClient() {
               </Field>
               <Field label="STRN (Optional)">
                 <input className="input-base" placeholder="Sales Tax Registration No." {...register('strn')} />
+              </Field>
+              <Field label="FBR Portal Password">
+                <input type="text" className="input-base" placeholder="Optional — stored securely" {...register('fbr_password')} />
               </Field>
             </div>
           </div>

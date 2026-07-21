@@ -161,6 +161,9 @@ export default function EditClient() {
           <Field label="STRN">
             <input className="input-base" {...register('strn')} />
           </Field>
+          <Field label="FBR Portal Password">
+            <input type="text" className="input-base" {...register('fbr_password')} />
+          </Field>
         </Section>
 
         <div className="form-section">

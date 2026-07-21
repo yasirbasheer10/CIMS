@@ -57,6 +57,7 @@ const initDB = async () => {
         employer VARCHAR(100),
         ntn VARCHAR(20),
         strn VARCHAR(20),
+        fbr_password VARCHAR(255),
         tax_remarks TEXT,
         legal_remarks TEXT,
         internal_comments TEXT,
@@ -67,6 +68,8 @@ const initDB = async () => {
         updated_at TIMESTAMP DEFAULT NOW()
       )
     `);
+
+    await client.query(`ALTER TABLE clients ADD COLUMN IF NOT EXISTS fbr_password VARCHAR(255)`).catch(() => {});
 
     // Documents table
     await client.query(`
