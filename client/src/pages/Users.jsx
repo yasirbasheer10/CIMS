@@ -221,7 +221,7 @@ export default function Users() {
                   placeholder="03XX-XXXXXXX"
                   {...reg1('phone', {
                     pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-                  })} />
+                  })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
               </FormField>
               <FormField label="Password" required error={e1.password?.message}>
                 <div style={{ position: 'relative' }}>

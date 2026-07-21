@@ -89,7 +89,7 @@ export default function EditClient() {
           <Field label="CNIC" error={errors.cnic?.message}>
             <input className={`input-base ${errors.cnic ? 'input-error' : ''}`} placeholder="XXXXX-XXXXXXX-X" {...register('cnic', {
               pattern: { value: /^[0-9\-]+$/, message: 'Only numbers and dashes allowed' }
-            })} />
+            })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9-]/g, '')} />
           </Field>
           <Field label="Date of Birth">
             <input type="date" className="input-base" {...register('dob')} />
@@ -110,12 +110,12 @@ export default function EditClient() {
             <input className={`input-base ${errors.mobile ? 'input-error' : ''}`} {...register('mobile', { 
               required: 'Required',
               pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-            })} />
+            })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
           </Field>
           <Field label="Alt Phone" error={errors.alt_phone?.message}>
             <input className={`input-base ${errors.alt_phone ? 'input-error' : ''}`} {...register('alt_phone', {
               pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-            })} />
+            })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
           </Field>
           <div style={{ gridColumn: 'span 2' }}>
             <Field label="Email" error={errors.email?.message}>

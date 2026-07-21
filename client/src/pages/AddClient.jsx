@@ -104,7 +104,7 @@ export default function AddClient() {
               <Field label="CNIC Number" error={errors.cnic?.message}>
                 <input className={`input-base ${errors.cnic ? 'input-error' : ''}`} placeholder="XXXXX-XXXXXXX-X" {...register('cnic', {
                   pattern: { value: /^[0-9\-]+$/, message: 'Only numbers and dashes allowed' }
-                })} />
+                })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9-]/g, '')} />
               </Field>
               <Field label="Date of Birth">
                 <input type="date" className="input-base" {...register('dob')} />
@@ -133,12 +133,12 @@ export default function AddClient() {
                 <input className={`input-base ${errors.mobile ? 'input-error' : ''}`} placeholder="03XX-XXXXXXX" {...register('mobile', { 
                   required: 'Mobile number is required',
                   pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-                })} />
+                })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
               </Field>
               <Field label="Alternate Phone" error={errors.alt_phone?.message}>
                 <input className={`input-base ${errors.alt_phone ? 'input-error' : ''}`} placeholder="03XX-XXXXXXX" {...register('alt_phone', {
                   pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-                })} />
+                })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
               </Field>
               <Field label="Email Address" error={errors.email?.message} style={{ gridColumn: 'span 2' }}>
                 <input type="email" className={`input-base ${errors.email ? 'input-error' : ''}`} placeholder="example@email.com" {...register('email', {

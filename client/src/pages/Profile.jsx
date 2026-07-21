@@ -184,7 +184,7 @@ export default function Profile() {
               placeholder="e.g. 03001234567"
               {...register('phone', {
                 pattern: { value: /^[0-9\-\+\s]+$/, message: 'Only numbers allowed' }
-              })} />
+              })} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9\-+\s]/g, '')} />
           </Field>
         </Section>
 
