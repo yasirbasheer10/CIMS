@@ -170,7 +170,9 @@ export default function Users() {
       {/* ── Add User Modal ── */}
       {showAdd && (
         <Modal title="Add New User" onClose={() => setShowAdd(false)} wide>
-          <form onSubmit={hs1(handleCreate)}>
+          <form onSubmit={hs1(handleCreate)} onKeyDown={(e) => {
+            if (e.key === 'Enter') e.preventDefault()
+          }}>
             {/* Avatar upload */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.5rem', padding: '1rem', background: 'rgba(30,111,217,0.05)', borderRadius: '10px', border: '1px solid rgba(30,111,217,0.1)' }}>
               <div style={{ position: 'relative', flexShrink: 0 }}>

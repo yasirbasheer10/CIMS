@@ -94,7 +94,12 @@ export default function AddClient() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          if (step < 5) nextStep()
+        }
+      }}>
         {/* Step 1: Personal */}
         {step === 1 && (
           <div className="form-section animate-fade-in">
