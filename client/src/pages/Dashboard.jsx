@@ -65,26 +65,26 @@ export default function Dashboard() {
         <StatCard
           icon={Users}
           label="Total Active Clients"
-          value={loading ? '...' : stats?.total_clients}
+          value={loading ? '...' : stats?.total_clients ?? 0}
           gradient="linear-gradient(135deg, var(--blue-500), #1a5fbf)"
         />
         <StatCard
           icon={UserPlus}
-          label="Recently Added"
-          value={loading ? '...' : stats?.recent_clients?.length}
-          gradient="linear-gradient(135deg, var(--emerald-500), #059669)"
+          label="Archived Clients"
+          value={loading ? '...' : stats?.archived_clients ?? 0}
+          gradient="linear-gradient(135deg, #7c3aed, #5b21b6)"
         />
         <StatCard
           icon={RefreshCw}
-          label="Recently Updated"
-          value={loading ? '...' : stats?.recent_updates?.length}
+          label="Total System Users"
+          value={loading ? '...' : stats?.total_users ?? 0}
           gradient="linear-gradient(135deg, var(--gold-500), #d97706)"
         />
         <StatCard
           icon={TrendingUp}
-          label="Archived Clients"
-          value={loading ? '...' : stats?.archived_clients}
-          gradient="linear-gradient(135deg, #7c3aed, #5b21b6)"
+          label="Active Users"
+          value={loading ? '...' : stats?.active_users ?? 0}
+          gradient="linear-gradient(135deg, var(--emerald-500), #059669)"
         />
       </div>
 

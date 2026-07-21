@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
 // GET /api/clients/stats — dashboard stats
 router.get('/stats', async (req, res) => {
   try {
-    const [total, archived, recentClients, recentUpdates] = await Promise.all([
+    const [total, archived, recentClients, recentUpdates, totalUsers, activeUsers] = await Promise.all([
       pool.query(`SELECT COUNT(*) FROM clients WHERE is_archived = false`),
       pool.query(`SELECT COUNT(*) FROM clients WHERE is_archived = true`),
       pool.query(
@@ -61,6 +61,8 @@ router.get('/stats', async (req, res) => {
       pool.query(
         `SELECT id, full_name, cnic, mobile, city, updated_at FROM clients WHERE is_archived = false ORDER BY updated_at DESC LIMIT 5`
       ),
+      pool.query(`SELECT COUNT(*) FROM users`),
+      pool.query(`SELECT COUNT(*) FROM users WHERE is_active = true`),
     ]);
 
     res.json({
@@ -68,12 +70,15 @@ router.get('/stats', async (req, res) => {
       archived_clients: parseInt(archived.rows[0].count),
       recent_clients: recentClients.rows,
       recent_updates: recentUpdates.rows,
+      total_users: parseInt(totalUsers.rows[0].count),
+      active_users: parseInt(activeUsers.rows[0].count),
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 // GET /api/clients/:id — single client
 router.get('/:id', async (req, res) => {

@@ -2,7 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import {
   LayoutDashboard, Users, Search, UserPlus, FileText,
-  ShieldCheck, Scale, ChevronRight
+  ShieldCheck, Scale, ChevronRight, UserCircle
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: 'Clients', icon: Users, path: '/clients' },
   { label: 'Add Client', icon: UserPlus, path: '/clients/new' },
   { label: 'Search', icon: Search, path: '/search' },
+  { label: 'My Profile', icon: UserCircle, path: '/profile' },
 ]
 
 const ADMIN_ITEMS = [

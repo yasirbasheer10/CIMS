@@ -31,10 +31,23 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
+  // Call this after profile update to refresh stored user data
+  const refreshUser = async () => {
+    try {
+      const res = await api.get('/users/me')
+      const updated = { ...user, ...res.data }
+      localStorage.setItem('cims_user', JSON.stringify(updated))
+      setUser(updated)
+      return updated
+    } catch (err) {
+      console.error('Failed to refresh user', err)
+    }
+  }
+
   const isAdmin = user?.role === 'admin'
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, isAdmin }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, isAdmin, refreshUser, setUser }}>
       {children}
     </AuthContext.Provider>
   )

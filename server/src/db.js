@@ -19,10 +19,22 @@ const initDB = async () => {
         full_name VARCHAR(100) NOT NULL,
         role VARCHAR(20) NOT NULL DEFAULT 'staff' CHECK (role IN ('admin', 'staff')),
         is_active BOOLEAN NOT NULL DEFAULT true,
+        fbr_password VARCHAR(255),
+        profile_image VARCHAR(500),
+        phone VARCHAR(20),
+        designation VARCHAR(100),
+        bio TEXT,
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
       )
     `);
+    // Safe migrations for existing databases
+    const userCols = ['fbr_password VARCHAR(255)', 'profile_image VARCHAR(500)', 'phone VARCHAR(20)', 'designation VARCHAR(100)', 'bio TEXT'];
+    for (const col of userCols) {
+      const colName = col.split(' ')[0];
+      await client.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS ${col}`).catch(() => {});
+    }
+
 
     // Clients table
     await client.query(`

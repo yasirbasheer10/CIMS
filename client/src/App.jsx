@@ -11,6 +11,7 @@ import EditClient from './pages/EditClient'
 import Search from './pages/Search'
 import Users from './pages/Users'
 import AuditLog from './pages/AuditLog'
+import Profile from './pages/Profile'
 
 function ProtectedRoute({ children, adminOnly = false }) {
   const { user } = useAuth()
@@ -34,6 +35,7 @@ function AppRoutes() {
         <Route path="search" element={<Search />} />
         <Route path="users" element={<ProtectedRoute adminOnly><Users /></ProtectedRoute>} />
         <Route path="audit" element={<ProtectedRoute adminOnly><AuditLog /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       </Route>
     </Routes>
   )
